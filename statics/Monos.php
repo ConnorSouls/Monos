@@ -5,11 +5,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Actividad MONO</title>
-    <link rel="stylesheet" href="./Style/MonosCool.css">
+    
+    <style> 
+        h1{
+            color: yellow;
+            text-align: center;
+        }
+        span{
+            background-color: rgb(55, 43, 226);
+            font-weight: 900;
+            font-size: medium;
+        }
+        td{
+            text-align: justify;
+        }
+
+    </style>
 </head>
 <body>
-    <?php 
-              
+    <?php    
         $palabra = array(
             0 => "lámpara",
             1 => "avión",
@@ -80,19 +94,20 @@
             12 => "un",
             13 => "símbolo",
             14 => "de",
-            15 => "pesperanza"
+            15 => "esperanza"
         );
 
         function frase($cadFrase)
         {
             for($num=0; $num <= 15; $num++)
             {
-                echo "<style> background-color: blue </style>";
-                echo $cadFrase[$num]." ";
+                echo "<span>".$cadFrase[$num]." </span>";
             }
         }  
         
     ?>
+    
+    <h1>MonkeyNovela</h1>
 
     <table align="center" border="2" style="border-collapse: collapse;" cellpadding=30px>
         <thead>
@@ -119,14 +134,22 @@
                         for ($c=1; $c<=300; $c++)
                         {
                             $numerito = rand (0,50);
-                            if ($numerito == 50 && $comprobador==0)
+                            if ($c == 300 && $comprobador==0)
                             {
                                 frase($cadFrase);
                                 $comprobador ++;
                             }
-                            else{
-                                echo $palabra[$numerito]." ";
-                                
+                            else
+                            {
+                                if ($numerito == 50 && $comprobador==0)
+                                {
+                                    frase($cadFrase);
+                                    $comprobador ++;
+                                }
+                                else{
+                                    echo $palabra[$numerito]." ";
+                                    
+                                }
                             }
                         }
                         
