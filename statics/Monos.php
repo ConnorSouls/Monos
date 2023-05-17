@@ -8,11 +8,11 @@
     
     <style> 
         h1{
-            color: yellow;
+            color: red;
             text-align: center;
         }
         span{
-            background-color: rgb(55, 43, 226);
+            color: red;
             font-weight: 900;
             font-size: medium;
         }
@@ -96,19 +96,24 @@
             14 => "de",
             15 => "esperanza"
         );
+        $modo = (isset($_POST['modo']) && $_POST['modo'] != "")? $_POST["modo"]: "Falta variable" ;
 
-        function frase($cadFrase)
+        function frase($cadFrase, $modo)
         {
-            for($num=0; $num <= 15; $num++)
-            {
-                echo "<span>".$cadFrase[$num]." </span>";
-            }
+            if($modo == 1){
+                for($num=0; $num <= 15; $num++)
+                {
+                    echo "<span>".$cadFrase[$num]." </span>";
+                }
+            }   
+            
+                
         }  
         
     ?>
     
     <h1>MonkeyNovela</h1>
-
+    
     <table align="center" border="2" style="border-collapse: collapse;" cellpadding=30px>
         <thead>
             <tr>
@@ -136,14 +141,14 @@
                             $numerito = rand (0,50);
                             if ($c == 300 && $comprobador==0)
                             {
-                                frase($cadFrase);
+                                frase($cadFrase, $modo);
                                 $comprobador ++;
                             }
                             else
                             {
                                 if ($numerito == 50 && $comprobador==0)
                                 {
-                                    frase($cadFrase);
+                                    frase($cadFrase, $modo);
                                     $comprobador ++;
                                 }
                                 else{
@@ -159,6 +164,18 @@
             </tr>
         </tbody>
     </table>
+    <form action="./Monos.php" method="post">
+        <fieldset>
+            <legend>Selecciona a tu escritor favorito</legend>
+            <label for="modo">Escoge un modo</label>
+            <select name="modo">
+                <option value="1">Normal</option>
+                <option value="2">Desordenado</option>
+                <option value="3">Aleatorio</option>
+            </select>
+            <button type="sumbit">Enviar</button>
+        </fieldset>
+    </form>
     
 </body>
 </html>
