@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Actividad MONO</title>
-    
+    <link rel="stylesheet" href=".\MonosCool.css">
     <style> 
         h1{
             color: red;
@@ -96,9 +96,12 @@
             14 => "de",
             15 => "esperanza"
         );
-        $modo = (isset($_POST['modo']) && $_POST['modo'] != "")? $_POST["modo"]: "Falta variable" ;
 
-        function frase($cadFrase, $modo)
+        $arregloNumCad = array(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15);
+
+        $modo = (isset($_POST['modo']) && $_POST['modo'] != "")? $_POST["modo"]: 0 ;
+
+        function frase($cadFrase, $modo, $arregloNumCad )
         {
             if($modo == 1){
                 for($num=0; $num <= 15; $num++)
@@ -106,8 +109,16 @@
                     echo "<span>".$cadFrase[$num]." </span>";
                 }
             }   
-            
-                
+            else 
+            {
+                if($modo == 2){
+                    shuffle($arregloNumCad);
+                    for($num=0; $num <= 15; $num++)
+                    {
+                        echo "<span>".$cadFrase[ $arregloNumCad[$num] ]." </span>";
+                    }
+                }                
+            }
         }  
         
     ?>
@@ -130,36 +141,49 @@
                 </th>
             </tr>
         </thead>
-
         <tbody>
             <tr>
                 <td>
                     <?php 
-                        $comprobador = 0;
-                        for ($c=1; $c<=300; $c++)
+                        if($modo != 0)
                         {
-                            $numerito = rand (0,50);
-                            if ($c == 300 && $comprobador==0)
+                            shuffle($arregloNumCad);
+                            $cl=0;
+                            $comprobador = 0;
+                            
+                            for ($c=1; $c<=300; $c++)
                             {
-                                frase($cadFrase, $modo);
-                                $comprobador ++;
-                            }
-                            else
-                            {
-                                if ($numerito == 50 && $comprobador==0)
+                                $Prb25 = rand(1,10);
+                                $numerito = rand (0,50);
+                                if ($c == 300 && $comprobador==0)
                                 {
-                                    frase($cadFrase, $modo);
+                                    frase($cadFrase, $modo, $arregloNumCad);
                                     $comprobador ++;
                                 }
-                                else{
-                                    echo $palabra[$numerito]." ";
-                                    
+                                else
+                                {
+                                    if ($numerito == 50 && $comprobador==0)
+                                    {
+                                        frase($cadFrase, $modo, $arregloNumCad);
+                                        $comprobador ++;
+                                    }
+                                    else
+                                    {
+                                        if($modo==3 && $cl <= 15)
+                                        {                                  
+                                            $Prb25 = rand(1,10);
+                                            if($Prb25 == 1) 
+                                            {
+                                                echo "<span>".$cl.$cadFrase[$arregloNumCad[$cl]]." </span>";
+                                                $cl++;
+                                            }    
+                                        }
+                                        echo $palabra[$numerito]." ";
+                                    }
                                 }
                             }
-                        }
-                        
+                        }  
                     ?>
-
                 </td>
             </tr>
         </tbody>
