@@ -5,36 +5,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Actividad MONO</title>
-    <link rel="stylesheet" href=".\MonosCool.css">
-    <style> 
-        h1{
-            color: red;
-            text-align: center;
-        }
-        span{
-            color: red;
-            font-weight: 900;
-            font-size: medium;
-        }
-        td{
-            text-align: justify;
-        }
-
-    </style>
+    <link rel="stylesheet" href="./styles/MonosCool.css">
 </head>
-<body>
+<body id="Banana" >
     <?php    
         $palabra = array(
-            0 => "lámpara",
-            1 => "avión",
-            2 => "ventana",
-            3 => "pelota",
-            4 => "sonrisa",
-            5 => "árbol",
-            6 => "montaña",
-            7 => "taza",
-            8 => "libro",
-            9 => "mariposa",
+            0 => "a",
+            1 => "b",
+            2 => "c",
+            3 => "d",
+            4 => "e",
+            5 => "f",
+            6 => "g",
+            7 => "h",
+            8 => "i",
+            9 => "j",
             10 => "camisa",
             11 => "nube",
             12 => "perro",
@@ -77,66 +62,64 @@
             49 => "ratón",
             50 => "patata",
         );
+
         
-        $cadFrase = array(
-            0 => "En",
-            1 => "medio",
-            2 => "del",
-            3 => "caos",
-            4 => "y",
-            5 => "la",
-            6 => "destrucción",
-            7 => "el",
-            8 => "Doom",
-            9 => "Slayer",
-            10 => "emerge",
-            11 => "como",
-            12 => "un",
-            13 => "símbolo",
-            14 => "de",
-            15 => "esperanza"
-        );
+        $modo  = (isset($_POST['modo'])  && $_POST['modo'] != "")?    $_POST["modo"]: 0 ;
+        $zona  = (isset($_POST['zona'])  && $_POST['zona'] != "")?    $_POST["zona"]: 0 ;
+        $frase = (isset($_POST['frase']) && $_POST['frase'] != "")?   $_POST["frase"]: 0 ;//La frase hecha cadena
+        
+        $arrayFrase = explode(" ", $frase);//nuestra frase cadena ----> se transforma a un arreglo con la cantidad de palabras de nuestra cadena
+        
+        
+        $numlocalidades = count($arrayFrase);// nos guarda en un int/número la cantidad de localidades del arreglo anterior, o cantidad de palabras
 
-        $arregloNumCad = array(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15);
+        //arreglo con la cantidad de localidades igual a la cantidad de palabras en arrayFrase
+        $arregloNumLocal;
+        for($contador=0; $contador < $numlocalidades; $contador++){
+            $arregloNumLocal[$contador] = $contador;
+        }
 
-        $modo = (isset($_POST['modo']) && $_POST['modo'] != "")? $_POST["modo"]: 0 ;
-
-        function frase($cadFrase, $modo, $arregloNumCad )
+        function frase($arrayFrase, $modo, $arregloNumLocal, $numlocalidades, $frase)
         {
             if($modo == 1){
-                for($num=0; $num <= 15; $num++)
-                {
-                    echo "<span>".$cadFrase[$num]." </span>";
-                }
+                    
+                    echo "<span>"." ".$frase." </span>";
             }   
             else 
             {
                 if($modo == 2){
-                    shuffle($arregloNumCad);
-                    for($num=0; $num <= 15; $num++)
+                    for($num=0; $num < $numlocalidades; $num++)
                     {
-                        echo "<span>".$cadFrase[ $arregloNumCad[$num] ]." </span>";
+                        echo "<span>".$arrayFrase [$arregloNumLocal[$num]]." </span>";
                     }
                 }                
             }
+            return;
         }  
-        
+
+        function palabra(){
+            $randchar = rand (3,8);
+            for ($m=0; $m < $randchar; $m++) {
+                $numerito = rand (63,126);
+                printf("%c", $numerito);
+            }
+            echo " ";
+            return;
+        }
     ?>
     
-    <h1>MonkeyNovela</h1>
+    <center><span id="titulo">MonkeyNovela</span></center>
     
     <table align="center" border="2" style="border-collapse: collapse;" cellpadding=30px>
         <thead>
             <tr>
-                <th>
+                <th id ="titulo2">
                     Libro de Monito: 
                     <?php 
-                        $numpalabrastitulo = rand (1,5);
-                        for ($i=1; $i <= $numpalabrastitulo ; $i++) 
-                        { 
-                            $numerito = rand (0,49);
-                            echo $palabra[$numerito]." ";
-                        }    
+                        $ptitulo = rand (3,5);
+                        for ($g=0; $g < $ptitulo ; $g++) { 
+                            palabra(); 
+                        } 
                     ?>
                 </th>
             </tr>
@@ -145,61 +128,102 @@
             <tr>
                 <td>
                     <?php 
-                        if($modo != 0)
+                        if($modo != 0 && $frase!=0)
                         {
-                            shuffle($arregloNumCad);
+                            shuffle($arregloNumLocal);
+                            //nos da # aleatorio entre 1 y 300
+                            $rand300 = rand(1,300);
+                            //contador local del if para el modo 3
                             $cl=0;
-                            $comprobador = 0;
-                            
+                            //inicia el ciclo para impresión 300 palabras
                             for ($c=1; $c<=300; $c++)
-                            {
-                                $Prb25 = rand(1,10);
-                                $numerito = rand (0,50);
-                                if ($c == 300 && $comprobador==0)
+                            {   
+                                //si el # de palabra en el que vamos, es igual al que nos dio rand300, imprime la frase 
+                                if ($c == $rand300 && $modo != 3)
                                 {
-                                    frase($cadFrase, $modo, $arregloNumCad);
-                                    $comprobador ++;
+                                    frase($arrayFrase, $modo, $arregloNumLocal, $numlocalidades, $frase);
                                 }
                                 else
                                 {
-                                    if ($numerito == 50 && $comprobador==0)
-                                    {
-                                        frase($cadFrase, $modo, $arregloNumCad);
-                                        $comprobador ++;
+                                    if($modo==3 && $cl < $numlocalidades)
+                                    {                                  
+                                        //Prb25 es un # aleatorio entre el 1 y 10
+                                        $Prb25 = rand(1,5);
+                                        if($Prb25 == 1) 
+                                        {
+                                            echo "<span>".$arrayFrase[$arregloNumLocal[$cl]]." </span>";
+                                            $cl++;
+                                        }    
                                     }
-                                    else
-                                    {
-                                        if($modo==3 && $cl <= 15)
-                                        {                                  
-                                            $Prb25 = rand(1,10);
-                                            if($Prb25 == 1) 
-                                            {
-                                                echo "<span>".$cl.$cadFrase[$arregloNumCad[$cl]]." </span>";
-                                                $cl++;
-                                            }    
-                                        }
-                                        echo $palabra[$numerito]." ";
-                                    }
+                                    palabra();
                                 }
+                                
                             }
-                        }  
+                        } 
+                        else {
+                            echo "Wachon, pon la frase :>";
+                        } 
                     ?>
                 </td>
             </tr>
         </tbody>
     </table>
-    <form action="./Monos.php" method="post">
-        <fieldset>
-            <legend>Selecciona a tu escritor favorito</legend>
-            <label for="modo">Escoge un modo</label>
-            <select name="modo">
-                <option value="1">Normal</option>
-                <option value="2">Desordenado</option>
-                <option value="3">Aleatorio</option>
-            </select>
-            <button type="sumbit">Enviar</button>
-        </fieldset>
-    </form>
+    <br>
+
+    <?php 
+    echo "Mode: ".$modo;
+    /*
+        America/Monterrey --- CDMX/Monterrey
+        America/New_York  --- New York
+        America/Chicago   --- Chicago
+        Asia/Beirut       --- Beirut
+    */
+    // horario es una cadena que por predeterminado ya tiene una zona horaria y s ele asignarán con un switch case
+        $horario = "America/Monterrey";
+
+        switch ($zona) {
+            case '1':
+                $horario = "America/Monterrey";
+                break;
+
+            case '2':
+                $horario = "America/New_York";
+                break;
+
+            case '3':
+                $horario = "America/Chicago";
+                break; 
+
+            case '4':
+                $horario = "Asia/Beirut";
+                break; 
+
+            default:
+                $horario = "America/Monterrey"; 
+                break;
+        }
+
+        date_default_timezone_set($horario);
+        $fecha=date('d-m-y '); 
+        $hora=date(' h:i a '); 
     
+    ?>
+    <table align="center" border="2" style="border-collapse: collapse;" cellpadding=10px>
+        <thead>
+            <tr>
+                <th class="zona">
+                    <?php
+                        echo "Fecha de Consulta: ".$fecha;
+                        echo "<br>Hora: ".$hora;
+                        //me despliega la cadena para saber que zona horaria...
+                        echo "<br>La zona horaria seleccionada es: ".$horario;        
+                    ?>      
+                        <form action="./index.html" target="_self">
+                            <button type="submit">Volver</button>  
+                        </form> 
+                </th>
+            </tr>
+        </thead>
+    </table>
 </body>
 </html>

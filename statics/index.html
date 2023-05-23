@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monos HTML</title>
+    <link rel="stylesheet" href="./styles/MonosCool.css">
+</head>
+<body> 
+    <center><span id="titulo">MonkeyNovela</span></center>
+    <form action="./Monos.php" method="post" target="_self">
+        <fieldset>
+            <legend>¿Qué frase estás buscando?</legend>
+            <textarea name="frase" id="frase" cols="73" rows="4" maxlength>En medio del caos y la destrucción el Doom Slayer emerge como un símbolo de esperanza</textarea>
+            <br><br>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/zmTFikGQOIo" title="YouTube video player" frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allowfullscreen></iframe>
+            <br><br>
+            <label for="modo">Escoge un modo: </label>
+            <select name="modo">
+                <option value="1">1) Normal</option>
+                <option value="2">2) Desordenado</option>
+                <option value="3">3) Aleatorio</option>
+            </select>
+            <br><br>
+            <!-- Enviamos el valor de zona horaria, y la variable $zona recibe el valor  -->
+            <label for="Zona">Escoge una Zona Horaria: </label>
+            <select name="zona">
+                <option value="0">Predeterminada</option>
+                <option value="1">CDMX/Monterrey</option>
+                <option value="2">New York</option>
+                <option value="3">Chicago</option>
+                <option value="4">Beirut</option>
+            </select>
+            <br><br>
+            <label>Zona horaria predeterminada: CDMX/Monterrey</label>
+            <br><br>
+            <button type="sumbit">Enviar</button>
+            <button type="reset">Borrar</button>
+        </fieldset>
+    </form> <br>
+</body>
+</html>

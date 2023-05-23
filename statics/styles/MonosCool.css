@@ -1,0 +1,43 @@
+body{
+    background-image: url( https://png.pngtree.com/thumb_back/fw800/background/20190619/pngtree-sweet-banana-seamless-pattern-image_130886.jpg );
+    } 
+    .zona{
+        color: #0084ff;
+        background-color: #f9a59a;
+    }
+    span{
+        color: rgb(255, 0, 0);
+        font-weight: 900;
+        font-size: medium;
+    }
+    td{
+        text-align: justify;
+    }
+    table{
+        background-color: white;
+    }
+    form{
+        background-color: rgb(255, 87, 87);
+    }
+    #titulo{
+        color: #add5fa;
+        font-weight: 900;
+        font-size: xx-large;
+        background-color: #fa5f49;
+    }
+    #titulo2{
+        color: #1667f1;
+        font-weight: 900;
+        font-size: xx-large;
+        background-color: #f9a59a;
+    }
+    #num{
+        color: #1667f1;
+    }
+    /*
+        #95b8f6
+        #add5fa
+        #f9d99a
+        #f9a59a
+        #fa5f49
+    */
