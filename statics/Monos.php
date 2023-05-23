@@ -148,7 +148,7 @@
                                     if($modo==3 && $cl < $numlocalidades)
                                     {                                  
                                         //Prb25 es un # aleatorio entre el 1 y 10
-                                        $Prb25 = rand(1,5);
+                                        $Prb25 = rand(1,10);
                                         if($Prb25 == 1) 
                                         {
                                             echo "<span>".$arrayFrase[$arregloNumLocal[$cl]]." </span>";
@@ -213,8 +213,8 @@
             <tr>
                 <th class="zona">
                     <?php
-                        echo "Fecha de Consulta: ".$fecha;
-                        echo "<br>Hora: ".$hora;
+                        echo "Fecha de consulta: ".$fecha;
+                        echo "<br>Hora de consulta: ".$hora;
                         //me despliega la cadena para saber que zona horaria...
                         echo "<br>La zona horaria seleccionada es: ".$horario;        
                     ?>      
